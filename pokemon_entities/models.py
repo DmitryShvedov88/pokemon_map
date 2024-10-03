@@ -19,6 +19,11 @@ class PokemonEntity(models.Model):
     lon = models.FloatField("Долгота")
     appeared_at = models.DateTimeField("Время появления")
     disappeared_at = models.DateTimeField("Время исчезновения")
+    level = models.IntegerField("Уровень", null=True, blank=True)
+    health = models.IntegerField("Здоровье", null=True, blank=True)
+    attack = models.IntegerField("Атака", null=True, blank=True)
+    protection = models.IntegerField("Защита", null=True, blank=True)
+    endurance = models.IntegerField("Выносливость", null=True, blank=True)
 
     def __str__(self):
         if self.pokemon.title:

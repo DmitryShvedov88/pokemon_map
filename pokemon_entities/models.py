@@ -5,7 +5,7 @@ class Pokemon(models.Model):
     """Пукемон"""
     id = models.AutoField(auto_created=True, primary_key=True)
     title = models.CharField(verbose_name="Name", max_length=200,)
-    photo = models.ImageField(upload_to='Photo', null=True)
+    photo = models.ImageField(null=True)
 
     def __str__(self):
         if self.title:
@@ -29,3 +29,11 @@ class PokemonEntity(models.Model):
         if self.pokemon.title:
             return self.pokemon.title
         return f'{self.pokemon.title} (Не существует)'
+
+
+
+# python manage.py shell
+# from pokemon_entities.models import Pokemon, PokemonEntity
+#pokemons = Pokemon.objects.all()  
+
+# print(pokemons[0].photo.url)

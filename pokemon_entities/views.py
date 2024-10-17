@@ -59,23 +59,29 @@ def show_all_pokemons(request):
 
 
 def show_pokemon(request, pokemon_id):
-    with open('pokemon_entities/pokemons.json', encoding='utf-8') as database:
-        pokemons = json.load(database)['pokemons']
-
-    for pokemon in pokemons:
-        if pokemon['pokemon_id'] == int(pokemon_id):
-            requested_pokemon = pokemon
-            break
+    folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
+    time = localtime()
+    pokemon = Pokemon.objects.get(id=pokemon_id)
+    print("pokemon1:", pokemon)
+    pokemon_entities =  PokemonEntity.objects.filter(pokemon=pokemon, appeared_at__lt=time, disappeared_at__gt=time)
+    print("pokemon_entities:", pokemon_entities)
+    for pokemon_entity in pokemon_entities:
+        print("pokemon_entity:", pokemon_entity)
+        add_pokemon(
+                folium_map, 
+                pokemon_entity.lat,
+                pokemon_entity.lon,
+                request.build_absolute_uri(pokemon_entity.pokemon.photo.url)
+            )
+        break
+    
     else:
         return HttpResponseNotFound('<h1>Такой покемон не найден</h1>')
+    
+    pokemon = {
+        "title_ru": pokemon.title
 
-    folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
-    for pokemon_entity in requested_pokemon['entities']:
-        add_pokemon(
-            folium_map, pokemon_entity['lat'],
-            pokemon_entity['lon'],
-            pokemon['img_url']
-        )
+    }
 
     return render(request, 'pokemon.html', context={
         'map': folium_map._repr_html_(), 'pokemon': pokemon

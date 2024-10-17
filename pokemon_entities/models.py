@@ -5,7 +5,8 @@ class Pokemon(models.Model):
     """Пукемон"""
     id = models.AutoField(auto_created=True, primary_key=True)
     title = models.CharField(verbose_name="Name", max_length=200,)
-    photo = models.ImageField(null=True)
+    photo = models.ImageField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True, verbose_name="Описание покемона")
 
     def __str__(self):
         if self.title:

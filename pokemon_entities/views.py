@@ -68,8 +68,7 @@ def show_pokemon(request, pokemon_id):
     for pokemon_entity in pokemon_entities:
         print("pokemon_entity:", pokemon_entity)
         add_pokemon(
-                folium_map, 
-                pokemon_entity.lat,
+                folium_map,                 pokemon_entity.lat,
                 pokemon_entity.lon,
                 request.build_absolute_uri(pokemon_entity.pokemon.photo.url)
             )
@@ -79,8 +78,8 @@ def show_pokemon(request, pokemon_id):
         return HttpResponseNotFound('<h1>Такой покемон не найден</h1>')
     
     pokemon = {
-        "title_ru": pokemon.title
-
+        "title_ru": pokemon.title,
+        "description": pokemon.description
     }
 
     return render(request, 'pokemon.html', context={

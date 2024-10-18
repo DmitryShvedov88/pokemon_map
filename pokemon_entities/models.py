@@ -4,7 +4,9 @@ from datetime import datetime
 class Pokemon(models.Model):
     """Пукемон"""
     id = models.AutoField(auto_created=True, primary_key=True)
-    title = models.CharField(verbose_name="Name", max_length=200,)
+    title = models.CharField(max_length=200, verbose_name="Name", blank=True, null=True)
+    title_en = models.CharField(max_length=150, verbose_name="Name_en", blank=True, null=True)
+    title_jp = models.CharField(max_length=150, verbose_name="Name_jp", blank=True, null=True)
     photo = models.ImageField(blank=True, null=True)
     description = models.TextField(blank=True, null=True, verbose_name="Описание покемона")
 

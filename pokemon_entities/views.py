@@ -85,7 +85,7 @@ def show_pokemon(request, pokemon_id):
         }
 
     next_evolution = {}
-    next_pokemon = pokemon.next_evolutions.first()
+    next_pokemon = pokemon.next_evolutions.get()
     
     if next_pokemon:
         print("next_pokemon:", next_pokemon)

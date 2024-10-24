@@ -19,15 +19,15 @@ class Pokemon(models.Model):
 class PokemonEntity(models.Model):
     """Характеристика покемона"""
     pokemon = models.ForeignKey(Pokemon, verbose_name="Покемон", on_delete=models.CASCADE, related_name="entities")
-    lat = models.FloatField("Широта")
-    lon = models.FloatField("Долгота")
-    appeared_at = models.DateTimeField("Время появления")
-    disappeared_at = models.DateTimeField("Время исчезновения")
-    level = models.IntegerField("Уровень", null=True, blank=True)
-    health = models.IntegerField("Здоровье", null=True, blank=True)
-    attack = models.IntegerField("Атака", null=True, blank=True)
-    protection = models.IntegerField("Защита", null=True, blank=True)
-    endurance = models.IntegerField("Выносливость", null=True, blank=True)
+    lat = models.FloatField(verbose_name="Широта")
+    lon = models.FloatField(verbose_name="Долгота")
+    appeared_at = models.DateTimeField(verbose_name="Время появления")
+    disappeared_at = models.DateTimeField(verbose_name="Время исчезновения")
+    level = models.IntegerField(verbose_name="Уровень", null=True, blank=True)
+    health = models.IntegerField(verbose_name="Здоровье", null=True, blank=True)
+    attack = models.IntegerField(verbose_name="Атака", null=True, blank=True)
+    protection = models.IntegerField(verbose_name="Защита", null=True, blank=True)
+    endurance = models.IntegerField(verbose_name="Выносливость", null=True, blank=True)
 
     def __str__(self):
         if self.pokemon.title:

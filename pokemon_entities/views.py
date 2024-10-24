@@ -62,11 +62,8 @@ def show_pokemon(request, pokemon_id):
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
     time = localtime()
     pokemon = Pokemon.objects.get(id=pokemon_id)
-    print("pokemon1:", pokemon)
     pokemon_entities =  PokemonEntity.objects.filter(pokemon=pokemon, appeared_at__lt=time, disappeared_at__gt=time)
-    print("pokemon_entities:", pokemon_entities)
     for pokemon_entity in pokemon_entities:
-        print("pokemon_entity:", pokemon_entity)
         add_pokemon(
                 folium_map, 
                 pokemon_entity.lat,
@@ -80,21 +77,31 @@ def show_pokemon(request, pokemon_id):
     previous_evolution = {}
     previous_pokemon = pokemon.evolution
     if previous_pokemon:
+        print("previous_pokemon:", previous_pokemon)
         previous_evolution = {
             "title_ru": previous_pokemon.title,
             "pokemon_id": previous_pokemon.id,
             "img_url": previous_pokemon.photo
         }
-    print('previous_pokemon', previous_pokemon)
-    print('previous_evolution', previous_evolution)
+
+    next_evolution = {}
+    next_pokemon = pokemon.next_evolutions.first()
     
+    if next_pokemon:
+        print("next_pokemon:", next_pokemon)
+        next_evolution = {
+            "title_ru": next_pokemon.title,
+            "pokemon_id": next_pokemon.id,
+            "img_url": next_pokemon.photo
+        }
+        
     pokemon = {
         "title_ru": pokemon.title,
         "title_en": pokemon.title_en,
         "title_jp": pokemon.title_jp,
         "description": pokemon.description,
-        "previous_evolution": previous_evolution
-
+        "previous_evolution": previous_evolution,
+        "next_evolution": next_evolution
     }
 
     return render(request, 'pokemon.html', context={

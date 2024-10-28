@@ -2,13 +2,12 @@ from django.db import models  # noqa F401
 
 class Pokemon(models.Model):
     """Пукемон"""
-    id = models.AutoField(auto_created=True, primary_key=True)
     title = models.CharField(max_length=200, verbose_name="Имя", blank=True, null=True)
     title_en = models.CharField(max_length=150, verbose_name="Имя_англ", blank=True, null=True)
     title_jp = models.CharField(max_length=150, verbose_name="Имя_япон", blank=True, null=True)
     photo = models.ImageField(verbose_name="Фото", blank=True, null=True)
     description = models.TextField(verbose_name="Описание покемона", blank=True, null=True)
-    evolution = models.ForeignKey(
+    previous_evolution = models.ForeignKey(
         "self", on_delete=models.CASCADE,
         null=True, blank=True,
         verbose_name="Текущая эволюция",

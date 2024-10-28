@@ -32,6 +32,4 @@ class PokemonEntity(models.Model):
     endurance = models.IntegerField(verbose_name="Выносливость", null=True, blank=True)
 
     def __str__(self):
-        if self.pokemon.title:
-            return self.pokemon.title
-        return f'{self.pokemon.title} (Не существует)'
+        return f'{self.pokemon.title}

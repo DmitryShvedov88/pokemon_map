@@ -15,9 +15,8 @@ class Pokemon(models.Model):
     )
 
     def __str__(self):
-        if self.title:
-            return self.title
-        return f'{self.title} (Не существует)'
+        return self.title
+
 
 class PokemonEntity(models.Model):
     """Характеристика покемона"""

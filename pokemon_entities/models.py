@@ -1,5 +1,4 @@
 from django.db import models  # noqa F401
-from datetime import datetime
 
 class Pokemon(models.Model):
     """Пукемон"""
@@ -38,11 +37,3 @@ class PokemonEntity(models.Model):
         if self.pokemon.title:
             return self.pokemon.title
         return f'{self.pokemon.title} (Не существует)'
-
-
-
-# python manage.py shell
-# from pokemon_entities.models import Pokemon, PokemonEntity
-#pokemons = Pokemon.objects.all()  
-
-# print(pokemons[0].photo.url)

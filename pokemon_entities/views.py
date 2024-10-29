@@ -65,10 +65,7 @@ def show_pokemon(request, pokemon_id):
                 pokemon_entity.lon,
                 request.build_absolute_uri(pokemon_entity.pokemon.photo.url)
             )
-        break
-    else:
-        return HttpResponseNotFound('<h1>Такой покемон не найден</h1>')
-    
+
     previous_evolution = {}
     previous_pokemon = pokemon.previous_evolution
     if previous_pokemon:

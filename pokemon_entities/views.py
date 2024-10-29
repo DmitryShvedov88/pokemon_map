@@ -40,7 +40,6 @@ def show_all_pokemons(request):
         )
 
     pokemons_on_page = []
-    pokemons = Pokemon.objects.all()
     for pokemon in Pokemon.objects.all():
         pokemons_on_page.append({
             'pokemon_id': pokemon.id,
